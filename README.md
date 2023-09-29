@@ -34,3 +34,12 @@ export default defineConfig({
 ```
 yarn build
 ```
+gitの設定
+```
+git init
+git remote add origin https://github.com/kammysakulove/react_tutorial_typescript
+git pull origin main
+git add .
+git commit -m "Initial Commit"
+git push origin main
+```

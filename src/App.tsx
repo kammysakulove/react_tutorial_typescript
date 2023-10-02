@@ -6,6 +6,10 @@ const Board = () => {
 
   const handleClick = (index: number) => {
     console.log(`click ${index}`);
+    if (calculateWinner(squares) || squares[index]) {
+      return;
+    }
+
     const nextSquares = [...squares];
 
     if (xIsNext) {

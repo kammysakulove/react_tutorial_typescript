@@ -1,5 +1,5 @@
 type SquareProps = {
-  value: string;
+  value: SquareState;
   onSquareClick: () => void;
 };
 

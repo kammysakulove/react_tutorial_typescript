@@ -1,25 +1,24 @@
-import { useState } from "react";
 import Square from "./Square.tsx";
 
-const Board = () => {
-  const [xIsNext, setXIsNext] = useState<boolean>(true);
-  const [squares, setSquares] = useState<string[]>(Array(9).fill(null));
+type BoardProps = {
+  player: boolean;
+  squares: SquareState[];
+  onPlay: (nextSquares: BoardState) => void;
+};
 
+const Board: React.FC<BoardProps> = ({ player, squares, onPlay }) => {
   const handleClick = (index: number) => {
-    console.log(`click ${index}`);
     if (calculateWinner(squares) || squares[index]) {
       return;
     }
 
-    const nextSquares = [...squares];
-
-    if (xIsNext) {
+    const nextSquares: SquareState[] = [...squares];
+    if (player) {
       nextSquares[index] = "X";
     } else {
       nextSquares[index] = "O";
     }
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   };
 
   const winner = calculateWinner(squares);
@@ -27,7 +26,7 @@ const Board = () => {
   if (winner) {
     status = `Winner: ${winner}`;
   } else {
-    status = `Next Player: ${xIsNext ? "X" : "O"}`;
+    status = `Next Player: ${player ? "X" : "O"}`;
   }
 
   return (
@@ -52,7 +51,7 @@ const Board = () => {
   );
 };
 
-const calculateWinner = (squares: string[]): string | null => {
+const calculateWinner = (squares: (string | null)[]): string | null => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

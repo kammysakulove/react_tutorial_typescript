@@ -1,7 +1,7 @@
-import Board from "./components/Bord.tsx";
+import Game from "./components/Game.tsx";
 
 const App = () => {
-  return <Board />;
+  return <Game />;
 };
 
 export default App;
